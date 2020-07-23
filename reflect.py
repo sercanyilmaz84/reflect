@@ -17,13 +17,16 @@ name = site_info.website_name
 
 
 def clone_page():
-	file = f"mkdir {name}"
-	makedir = os.popen(file)
-	response = urllib.request.urlopen(url)
-	webContent = response.read()
-	f = open(f'{name}\\{name}.html', 'wb')
-	f.write(webContent)
-	f.close()
+	try:
+		file = f"mkdir {name}"
+		makedir = os.popen(file)
+		response = urllib.request.urlopen(url)
+		webContent = response.read()
+		f = open(f'{name}\\{name}.html', 'wb')
+		f.write(webContent)
+		f.close()
+	except:
+		print("Error!!!")
 
 if __name__ == '__main__':
 	clone_page()
