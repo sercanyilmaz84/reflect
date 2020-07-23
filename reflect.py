@@ -1,89 +1,29 @@
-import urllib.request, urllib.error, urllib.parse
+import urllib.request, urllib.error, urllib.parse, optparse, os
 
-menu = """
+def user_input():
+    parse_object = optparse.OptionParser()
+    parse_object.add_option("-u", "--url", dest="website_url", help= "Enter a url")
+    parse_object.add_option("-n", "--name", dest="website_name", help= "Enter a name")
+    options = parse_object.parse_args()[0]
+    if not options.website_url:
+        print("-u, you must enter an url")
+    if not options.website_name:
+        print("-n, you must enter a name")
+    return options
+ 
+site_info = user_input()
+url = site_info.website_url
+name = site_info.website_name
 
-1) Facebook
-2) Trendyol
-3) Gmail
-4) LinkedIn
-5) Github
-6) n11.com
-7) Spotify
 
-"""
-
-print(menu)
-
-m = input("Choose a page: ")
-
-
-def facebook():
-	response = urllib.request.urlopen('http://facebook.com')
+def clone_page():
+	file = f"mkdir {name}"
+	makedir = os.popen(file)
+	response = urllib.request.urlopen(url)
 	webContent = response.read()
-	f = open('C:\\Users\\Sercan YILMAZ\\Desktop\\reflect\\facebook\\facebook.html', 'wb')
+	f = open(f'{name}\\{name}.html', 'wb')
 	f.write(webContent)
-	f.close
+	f.close()
 
-def trendyol():
-	response = urllib.request.urlopen('http://trendyol.com/login')
-	webContent = response.read()
-	f = open('C:\\Users\\Sercan YILMAZ\\Desktop\\reflect\\trendyol\\trendyol.html', 'wb')
-	f.write(webContent)
-	f.close
-
-def gmail():
-	response = urllib.request.urlopen('http://gmail.com')
-	webContent = response.read()
-	f = open('C:\\Users\\Sercan YILMAZ\\Desktop\\reflect\\gmail\\gmail.html', 'wb')
-	f.write(webContent)
-	f.close
-
-def linkedin():
-	response = urllib.request.urlopen('http://linkedin.com')
-	webContent = response.read()
-	f = open('C:\\Users\\Sercan YILMAZ\\Desktop\\reflect\\linkedin\\linkedin.html', 'wb')
-	f.write(webContent)
-	f.close
-
-def github():
-	response = urllib.request.urlopen('http://github.com/login')
-	webContent = response.read()
-	f = open('C:\\Users\\Sercan YILMAZ\\Desktop\\reflect\\github\\github.html', 'wb')
-	f.write(webContent)
-	f.close
-
-def n11():
-	response = urllib.request.urlopen('http://www.n11.com/giris-yap')
-	webContent = response.read()
-	f = open('C:\\Users\\Sercan YILMAZ\\Desktop\\reflect\\n11\\n11.html', 'wb')
-	f.write(webContent)
-	f.close
-
-def spotify():
-	response = urllib.request.urlopen('http://accounts.spotify.com/tr/login')
-	webContent = response.read()
-	f = open('C:\\Users\\Sercan YILMAZ\\Desktop\\reflect\\spotify\\spotify.html', 'wb')
-	f.write(webContent)
-	f.close
-
-
-
-
-
-
-if m == "1":
-	facebook()
-elif m == "2":
-	trendyol()
-elif m == "3":
-	gmail()
-elif m == "4":
-	linkedin()
-elif m == "5":
-	github()
-elif m == "6":
-	n11()
-elif m == "7":
-	spotify()
-else:
-	print("Incorrect input!!!")
+if __name__ == '__main__':
+	clone_page()
